@@ -255,6 +255,127 @@ bool ParseFromFileDescriptor(int file_descriptor);
 ```
 
 ### 2.6 在rpc通信中的序列化和反序列化
+首先要明确的是，protobuf本身是没有任何rpc通信功能的，他只是对rpc方法的描述，通过它的描述，我们来做有关rpc请求的序列化和反序列化
+
+例子：
+```cpp
+syntax = "proto3";
+
+package faxbug; // 定义一个包名，这在 C++ 中会成为命名空间
+
+option cc_generic_services = true;
+
+message ResultCode {
+  int32 errcode = 1;
+  bytes errmsg = 2;
+}
+
+message LoginRequest
+{
+  bytes name = 1;
+  bytes pwd = 2;
+}
+
+message LoginResponse
+{
+  ResultCode result = 1;
+  bool success = 2;
+}
+
+message GetFrindListsRequest
+{
+  uint32 userid = 1;
+}
+
+message User{
+  bytes name = 1;
+  uint32 age = 2;
+  enum Sex{
+    MAN = 0;
+    WOMAN = 1;
+  }
+  Sex sex = 3;
+}
+
+message GetFrindListsResponse
+{
+  ResultCode result = 1;
+  repeated User friend_list = 2;
+}
+
+service UserServiceRpc
+{
+  rpc Login(LoginRequest) returns(LoginResponse);
+  rpc GetFriendLists(GetFrindListsRequest) returns(GetFrindListsResponse);
+}
+```
+> rpc Login(LoginRequest) returns(LoginResponse);
+
+表示传入的是LoginRequest，返回的是LoginResponse
+>rpc GetFriendLists(GetFrindListsRequest) returns(GetFrindListsResponse);
+
+同理
+
+```shell
+protoc test.proto --cpp_out=./
+```
+在通过message关键字生成的类都继承自message，message基类提供了对私有成员变量的访问接口比如name() pwd() set_name() set_pwd()
+
+而通过rpc会生成两个类
+```cpp
+class UserServiceRpc_Stub : public UserServiceRpc
+
+class UserServiceRpc : public ::PROTOBUF_NAMESPACE_ID::Service
+```
+**生成UserServiceRpc类作为rpc服务提供者，继承自service，有核心的三个方法**
+```cpp
+  virtual void Login(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::LoginRequest* request,
+                       ::faxbug::LoginResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void GetFriendLists(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::GetFrindListsRequest* request,
+                       ::faxbug::GetFrindListsResponse* response,
+                       ::google::protobuf::Closure* done);
+  const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* GetDescriptor();
+```
+而UserServiceRpc_Stub作为服务消费者，继承自UserServiceRpc，在它的内部有这么几个方法
+```cpp
+UserServiceRpc_Stub(::PROTOBUF_NAMESPACE_ID::RpcChannel* channel);
+void Login(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::LoginRequest* request,
+                       ::faxbug::LoginResponse* response,
+                       ::google::protobuf::Closure* done);
+  void GetFriendLists(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::GetFrindListsRequest* request,
+                       ::faxbug::GetFrindListsResponse* response,
+                       ::google::protobuf::Closure* done);
+```
+可以看到他同样有两个我们在test.proto中定义的方法，除此之外，他没有默认构造函数，而是传入一个RpcChannel类，我们再看Login和GetFriendLists的实现
+```cpp
+void UserServiceRpc_Stub::Login(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                              const ::faxbug::LoginRequest* request,
+                              ::faxbug::LoginResponse* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(0),
+                       controller, request, response, done);
+}
+void UserServiceRpc_Stub::GetFriendLists(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                              const ::faxbug::GetFrindListsRequest* request,
+                              ::faxbug::GetFrindListsResponse* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(1),
+                       controller, request, response, done);
+}
+```
+都是调用channel_->CallMethod方法，我们再看这个方法：
+```cpp
+  virtual void CallMethod(const MethodDescriptor* method,
+                          RpcController* controller, const Message* request,
+                          Message* response, Closure* done) = 0;
+```
+是一个纯虚函数，需要子类重写,其实这个方法就是给到用户，在使用框架时的接口
+![rpc](res/proto%20rpc.png)
 
 ## 三、从使用角度理解框架的功能
 

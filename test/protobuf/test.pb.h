@@ -31,6 +31,8 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
+#include <google/protobuf/service.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -47,42 +49,87 @@ struct TableStruct_test_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[1]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_test_2eproto;
-namespace example_package {
-class Person;
-class PersonDefaultTypeInternal;
-extern PersonDefaultTypeInternal _Person_default_instance_;
-}  // namespace example_package
+namespace faxbug {
+class GetFrindListsRequest;
+class GetFrindListsRequestDefaultTypeInternal;
+extern GetFrindListsRequestDefaultTypeInternal _GetFrindListsRequest_default_instance_;
+class GetFrindListsResponse;
+class GetFrindListsResponseDefaultTypeInternal;
+extern GetFrindListsResponseDefaultTypeInternal _GetFrindListsResponse_default_instance_;
+class LoginRequest;
+class LoginRequestDefaultTypeInternal;
+extern LoginRequestDefaultTypeInternal _LoginRequest_default_instance_;
+class LoginResponse;
+class LoginResponseDefaultTypeInternal;
+extern LoginResponseDefaultTypeInternal _LoginResponse_default_instance_;
+class ResultCode;
+class ResultCodeDefaultTypeInternal;
+extern ResultCodeDefaultTypeInternal _ResultCode_default_instance_;
+class User;
+class UserDefaultTypeInternal;
+extern UserDefaultTypeInternal _User_default_instance_;
+}  // namespace faxbug
 PROTOBUF_NAMESPACE_OPEN
-template<> ::example_package::Person* Arena::CreateMaybeMessage<::example_package::Person>(Arena*);
+template<> ::faxbug::GetFrindListsRequest* Arena::CreateMaybeMessage<::faxbug::GetFrindListsRequest>(Arena*);
+template<> ::faxbug::GetFrindListsResponse* Arena::CreateMaybeMessage<::faxbug::GetFrindListsResponse>(Arena*);
+template<> ::faxbug::LoginRequest* Arena::CreateMaybeMessage<::faxbug::LoginRequest>(Arena*);
+template<> ::faxbug::LoginResponse* Arena::CreateMaybeMessage<::faxbug::LoginResponse>(Arena*);
+template<> ::faxbug::ResultCode* Arena::CreateMaybeMessage<::faxbug::ResultCode>(Arena*);
+template<> ::faxbug::User* Arena::CreateMaybeMessage<::faxbug::User>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace example_package {
+namespace faxbug {
 
+enum User_Sex : int {
+  User_Sex_MAN = 0,
+  User_Sex_WOMAN = 1,
+  User_Sex_User_Sex_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  User_Sex_User_Sex_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool User_Sex_IsValid(int value);
+constexpr User_Sex User_Sex_Sex_MIN = User_Sex_MAN;
+constexpr User_Sex User_Sex_Sex_MAX = User_Sex_WOMAN;
+constexpr int User_Sex_Sex_ARRAYSIZE = User_Sex_Sex_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* User_Sex_descriptor();
+template<typename T>
+inline const std::string& User_Sex_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, User_Sex>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function User_Sex_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    User_Sex_descriptor(), enum_t_value);
+}
+inline bool User_Sex_Parse(
+    const std::string& name, User_Sex* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<User_Sex>(
+    User_Sex_descriptor(), name, value);
+}
 // ===================================================================
 
-class Person :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:example_package.Person) */ {
+class ResultCode :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:faxbug.ResultCode) */ {
  public:
-  Person();
-  virtual ~Person();
+  ResultCode();
+  virtual ~ResultCode();
 
-  Person(const Person& from);
-  Person(Person&& from) noexcept
-    : Person() {
+  ResultCode(const ResultCode& from);
+  ResultCode(ResultCode&& from) noexcept
+    : ResultCode() {
     *this = ::std::move(from);
   }
 
-  inline Person& operator=(const Person& from) {
+  inline ResultCode& operator=(const ResultCode& from) {
     CopyFrom(from);
     return *this;
   }
-  inline Person& operator=(Person&& from) noexcept {
+  inline ResultCode& operator=(ResultCode&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -100,37 +147,37 @@ class Person :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const Person& default_instance();
+  static const ResultCode& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Person* internal_default_instance() {
-    return reinterpret_cast<const Person*>(
-               &_Person_default_instance_);
+  static inline const ResultCode* internal_default_instance() {
+    return reinterpret_cast<const ResultCode*>(
+               &_ResultCode_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(Person& a, Person& b) {
+  friend void swap(ResultCode& a, ResultCode& b) {
     a.Swap(&b);
   }
-  inline void Swap(Person* other) {
+  inline void Swap(ResultCode* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Person* New() const final {
-    return CreateMaybeMessage<Person>(nullptr);
+  inline ResultCode* New() const final {
+    return CreateMaybeMessage<ResultCode>(nullptr);
   }
 
-  Person* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<Person>(arena);
+  ResultCode* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ResultCode>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const Person& from);
-  void MergeFrom(const Person& from);
+  void CopyFrom(const ResultCode& from);
+  void MergeFrom(const ResultCode& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -144,10 +191,156 @@ class Person :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Person* other);
+  void InternalSwap(ResultCode* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "example_package.Person";
+    return "faxbug.ResultCode";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_test_2eproto);
+    return ::descriptor_table_test_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kErrmsgFieldNumber = 2,
+    kErrcodeFieldNumber = 1,
+  };
+  // bytes errmsg = 2;
+  void clear_errmsg();
+  const std::string& errmsg() const;
+  void set_errmsg(const std::string& value);
+  void set_errmsg(std::string&& value);
+  void set_errmsg(const char* value);
+  void set_errmsg(const void* value, size_t size);
+  std::string* mutable_errmsg();
+  std::string* release_errmsg();
+  void set_allocated_errmsg(std::string* errmsg);
+  private:
+  const std::string& _internal_errmsg() const;
+  void _internal_set_errmsg(const std::string& value);
+  std::string* _internal_mutable_errmsg();
+  public:
+
+  // int32 errcode = 1;
+  void clear_errcode();
+  ::PROTOBUF_NAMESPACE_ID::int32 errcode() const;
+  void set_errcode(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_errcode() const;
+  void _internal_set_errcode(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:faxbug.ResultCode)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr errmsg_;
+  ::PROTOBUF_NAMESPACE_ID::int32 errcode_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_test_2eproto;
+};
+// -------------------------------------------------------------------
+
+class LoginRequest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:faxbug.LoginRequest) */ {
+ public:
+  LoginRequest();
+  virtual ~LoginRequest();
+
+  LoginRequest(const LoginRequest& from);
+  LoginRequest(LoginRequest&& from) noexcept
+    : LoginRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline LoginRequest& operator=(const LoginRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LoginRequest& operator=(LoginRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const LoginRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const LoginRequest* internal_default_instance() {
+    return reinterpret_cast<const LoginRequest*>(
+               &_LoginRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(LoginRequest& a, LoginRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LoginRequest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline LoginRequest* New() const final {
+    return CreateMaybeMessage<LoginRequest>(nullptr);
+  }
+
+  LoginRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<LoginRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const LoginRequest& from);
+  void MergeFrom(const LoginRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LoginRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "faxbug.LoginRequest";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -173,16 +366,15 @@ class Person :
 
   enum : int {
     kNameFieldNumber = 1,
-    kEmailFieldNumber = 3,
-    kIdFieldNumber = 2,
+    kPwdFieldNumber = 2,
   };
-  // string name = 1;
+  // bytes name = 1;
   void clear_name();
   const std::string& name() const;
   void set_name(const std::string& value);
   void set_name(std::string&& value);
   void set_name(const char* value);
-  void set_name(const char* value, size_t size);
+  void set_name(const void* value, size_t size);
   std::string* mutable_name();
   std::string* release_name();
   void set_allocated_name(std::string* name);
@@ -192,42 +384,713 @@ class Person :
   std::string* _internal_mutable_name();
   public:
 
-  // string email = 3;
-  void clear_email();
-  const std::string& email() const;
-  void set_email(const std::string& value);
-  void set_email(std::string&& value);
-  void set_email(const char* value);
-  void set_email(const char* value, size_t size);
-  std::string* mutable_email();
-  std::string* release_email();
-  void set_allocated_email(std::string* email);
+  // bytes pwd = 2;
+  void clear_pwd();
+  const std::string& pwd() const;
+  void set_pwd(const std::string& value);
+  void set_pwd(std::string&& value);
+  void set_pwd(const char* value);
+  void set_pwd(const void* value, size_t size);
+  std::string* mutable_pwd();
+  std::string* release_pwd();
+  void set_allocated_pwd(std::string* pwd);
   private:
-  const std::string& _internal_email() const;
-  void _internal_set_email(const std::string& value);
-  std::string* _internal_mutable_email();
+  const std::string& _internal_pwd() const;
+  void _internal_set_pwd(const std::string& value);
+  std::string* _internal_mutable_pwd();
   public:
 
-  // int32 id = 2;
-  void clear_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 id() const;
-  void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_id() const;
-  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:example_package.Person)
+  // @@protoc_insertion_point(class_scope:faxbug.LoginRequest)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr email_;
-  ::PROTOBUF_NAMESPACE_ID::int32 id_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr pwd_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_test_2eproto;
 };
+// -------------------------------------------------------------------
+
+class LoginResponse :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:faxbug.LoginResponse) */ {
+ public:
+  LoginResponse();
+  virtual ~LoginResponse();
+
+  LoginResponse(const LoginResponse& from);
+  LoginResponse(LoginResponse&& from) noexcept
+    : LoginResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline LoginResponse& operator=(const LoginResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LoginResponse& operator=(LoginResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const LoginResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const LoginResponse* internal_default_instance() {
+    return reinterpret_cast<const LoginResponse*>(
+               &_LoginResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(LoginResponse& a, LoginResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LoginResponse* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline LoginResponse* New() const final {
+    return CreateMaybeMessage<LoginResponse>(nullptr);
+  }
+
+  LoginResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<LoginResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const LoginResponse& from);
+  void MergeFrom(const LoginResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LoginResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "faxbug.LoginResponse";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_test_2eproto);
+    return ::descriptor_table_test_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kResultFieldNumber = 1,
+    kSuccessFieldNumber = 2,
+  };
+  // .faxbug.ResultCode result = 1;
+  bool has_result() const;
+  private:
+  bool _internal_has_result() const;
+  public:
+  void clear_result();
+  const ::faxbug::ResultCode& result() const;
+  ::faxbug::ResultCode* release_result();
+  ::faxbug::ResultCode* mutable_result();
+  void set_allocated_result(::faxbug::ResultCode* result);
+  private:
+  const ::faxbug::ResultCode& _internal_result() const;
+  ::faxbug::ResultCode* _internal_mutable_result();
+  public:
+
+  // bool success = 2;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:faxbug.LoginResponse)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::faxbug::ResultCode* result_;
+  bool success_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_test_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetFrindListsRequest :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:faxbug.GetFrindListsRequest) */ {
+ public:
+  GetFrindListsRequest();
+  virtual ~GetFrindListsRequest();
+
+  GetFrindListsRequest(const GetFrindListsRequest& from);
+  GetFrindListsRequest(GetFrindListsRequest&& from) noexcept
+    : GetFrindListsRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline GetFrindListsRequest& operator=(const GetFrindListsRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetFrindListsRequest& operator=(GetFrindListsRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GetFrindListsRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GetFrindListsRequest* internal_default_instance() {
+    return reinterpret_cast<const GetFrindListsRequest*>(
+               &_GetFrindListsRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(GetFrindListsRequest& a, GetFrindListsRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetFrindListsRequest* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetFrindListsRequest* New() const final {
+    return CreateMaybeMessage<GetFrindListsRequest>(nullptr);
+  }
+
+  GetFrindListsRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GetFrindListsRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GetFrindListsRequest& from);
+  void MergeFrom(const GetFrindListsRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetFrindListsRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "faxbug.GetFrindListsRequest";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_test_2eproto);
+    return ::descriptor_table_test_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUseridFieldNumber = 1,
+  };
+  // uint32 userid = 1;
+  void clear_userid();
+  ::PROTOBUF_NAMESPACE_ID::uint32 userid() const;
+  void set_userid(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_userid() const;
+  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:faxbug.GetFrindListsRequest)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 userid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_test_2eproto;
+};
+// -------------------------------------------------------------------
+
+class User :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:faxbug.User) */ {
+ public:
+  User();
+  virtual ~User();
+
+  User(const User& from);
+  User(User&& from) noexcept
+    : User() {
+    *this = ::std::move(from);
+  }
+
+  inline User& operator=(const User& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline User& operator=(User&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const User& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const User* internal_default_instance() {
+    return reinterpret_cast<const User*>(
+               &_User_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(User& a, User& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(User* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline User* New() const final {
+    return CreateMaybeMessage<User>(nullptr);
+  }
+
+  User* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<User>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const User& from);
+  void MergeFrom(const User& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(User* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "faxbug.User";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_test_2eproto);
+    return ::descriptor_table_test_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef User_Sex Sex;
+  static constexpr Sex MAN =
+    User_Sex_MAN;
+  static constexpr Sex WOMAN =
+    User_Sex_WOMAN;
+  static inline bool Sex_IsValid(int value) {
+    return User_Sex_IsValid(value);
+  }
+  static constexpr Sex Sex_MIN =
+    User_Sex_Sex_MIN;
+  static constexpr Sex Sex_MAX =
+    User_Sex_Sex_MAX;
+  static constexpr int Sex_ARRAYSIZE =
+    User_Sex_Sex_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  Sex_descriptor() {
+    return User_Sex_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& Sex_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, Sex>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function Sex_Name.");
+    return User_Sex_Name(enum_t_value);
+  }
+  static inline bool Sex_Parse(const std::string& name,
+      Sex* value) {
+    return User_Sex_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNameFieldNumber = 1,
+    kAgeFieldNumber = 2,
+    kSexFieldNumber = 3,
+  };
+  // bytes name = 1;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const void* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
+  // uint32 age = 2;
+  void clear_age();
+  ::PROTOBUF_NAMESPACE_ID::uint32 age() const;
+  void set_age(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_age() const;
+  void _internal_set_age(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // .faxbug.User.Sex sex = 3;
+  void clear_sex();
+  ::faxbug::User_Sex sex() const;
+  void set_sex(::faxbug::User_Sex value);
+  private:
+  ::faxbug::User_Sex _internal_sex() const;
+  void _internal_set_sex(::faxbug::User_Sex value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:faxbug.User)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 age_;
+  int sex_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_test_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetFrindListsResponse :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:faxbug.GetFrindListsResponse) */ {
+ public:
+  GetFrindListsResponse();
+  virtual ~GetFrindListsResponse();
+
+  GetFrindListsResponse(const GetFrindListsResponse& from);
+  GetFrindListsResponse(GetFrindListsResponse&& from) noexcept
+    : GetFrindListsResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline GetFrindListsResponse& operator=(const GetFrindListsResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetFrindListsResponse& operator=(GetFrindListsResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GetFrindListsResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GetFrindListsResponse* internal_default_instance() {
+    return reinterpret_cast<const GetFrindListsResponse*>(
+               &_GetFrindListsResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(GetFrindListsResponse& a, GetFrindListsResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetFrindListsResponse* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetFrindListsResponse* New() const final {
+    return CreateMaybeMessage<GetFrindListsResponse>(nullptr);
+  }
+
+  GetFrindListsResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GetFrindListsResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GetFrindListsResponse& from);
+  void MergeFrom(const GetFrindListsResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetFrindListsResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "faxbug.GetFrindListsResponse";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_test_2eproto);
+    return ::descriptor_table_test_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFriendListFieldNumber = 2,
+    kResultFieldNumber = 1,
+  };
+  // repeated .faxbug.User friend_list = 2;
+  int friend_list_size() const;
+  private:
+  int _internal_friend_list_size() const;
+  public:
+  void clear_friend_list();
+  ::faxbug::User* mutable_friend_list(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::faxbug::User >*
+      mutable_friend_list();
+  private:
+  const ::faxbug::User& _internal_friend_list(int index) const;
+  ::faxbug::User* _internal_add_friend_list();
+  public:
+  const ::faxbug::User& friend_list(int index) const;
+  ::faxbug::User* add_friend_list();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::faxbug::User >&
+      friend_list() const;
+
+  // .faxbug.ResultCode result = 1;
+  bool has_result() const;
+  private:
+  bool _internal_has_result() const;
+  public:
+  void clear_result();
+  const ::faxbug::ResultCode& result() const;
+  ::faxbug::ResultCode* release_result();
+  ::faxbug::ResultCode* mutable_result();
+  void set_allocated_result(::faxbug::ResultCode* result);
+  private:
+  const ::faxbug::ResultCode& _internal_result() const;
+  ::faxbug::ResultCode* _internal_mutable_result();
+  public:
+
+  // @@protoc_insertion_point(class_scope:faxbug.GetFrindListsResponse)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::faxbug::User > friend_list_;
+  ::faxbug::ResultCode* result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_test_2eproto;
+};
+// ===================================================================
+
+class UserServiceRpc_Stub;
+
+class UserServiceRpc : public ::PROTOBUF_NAMESPACE_ID::Service {
+ protected:
+  // This class should be treated as an abstract interface.
+  inline UserServiceRpc() {};
+ public:
+  virtual ~UserServiceRpc();
+
+  typedef UserServiceRpc_Stub Stub;
+
+  static const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* descriptor();
+
+  virtual void Login(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::LoginRequest* request,
+                       ::faxbug::LoginResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void GetFriendLists(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::GetFrindListsRequest* request,
+                       ::faxbug::GetFrindListsResponse* response,
+                       ::google::protobuf::Closure* done);
+
+  // implements Service ----------------------------------------------
+
+  const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* GetDescriptor();
+  void CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method,
+                  ::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                  const ::PROTOBUF_NAMESPACE_ID::Message* request,
+                  ::PROTOBUF_NAMESPACE_ID::Message* response,
+                  ::google::protobuf::Closure* done);
+  const ::PROTOBUF_NAMESPACE_ID::Message& GetRequestPrototype(
+    const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method) const;
+  const ::PROTOBUF_NAMESPACE_ID::Message& GetResponsePrototype(
+    const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method) const;
+
+ private:
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(UserServiceRpc);
+};
+
+class UserServiceRpc_Stub : public UserServiceRpc {
+ public:
+  UserServiceRpc_Stub(::PROTOBUF_NAMESPACE_ID::RpcChannel* channel);
+  UserServiceRpc_Stub(::PROTOBUF_NAMESPACE_ID::RpcChannel* channel,
+                   ::PROTOBUF_NAMESPACE_ID::Service::ChannelOwnership ownership);
+  ~UserServiceRpc_Stub();
+
+  inline ::PROTOBUF_NAMESPACE_ID::RpcChannel* channel() { return channel_; }
+
+  // implements UserServiceRpc ------------------------------------------
+
+  void Login(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::LoginRequest* request,
+                       ::faxbug::LoginResponse* response,
+                       ::google::protobuf::Closure* done);
+  void GetFriendLists(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::faxbug::GetFrindListsRequest* request,
+                       ::faxbug::GetFrindListsResponse* response,
+                       ::google::protobuf::Closure* done);
+ private:
+  ::PROTOBUF_NAMESPACE_ID::RpcChannel* channel_;
+  bool owns_channel_;
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(UserServiceRpc_Stub);
+};
+
+
 // ===================================================================
 
 
@@ -237,155 +1100,554 @@ class Person :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// Person
+// ResultCode
 
-// string name = 1;
-inline void Person::clear_name() {
+// int32 errcode = 1;
+inline void ResultCode::clear_errcode() {
+  errcode_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ResultCode::_internal_errcode() const {
+  return errcode_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ResultCode::errcode() const {
+  // @@protoc_insertion_point(field_get:faxbug.ResultCode.errcode)
+  return _internal_errcode();
+}
+inline void ResultCode::_internal_set_errcode(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  errcode_ = value;
+}
+inline void ResultCode::set_errcode(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_errcode(value);
+  // @@protoc_insertion_point(field_set:faxbug.ResultCode.errcode)
+}
+
+// bytes errmsg = 2;
+inline void ResultCode::clear_errmsg() {
+  errmsg_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ResultCode::errmsg() const {
+  // @@protoc_insertion_point(field_get:faxbug.ResultCode.errmsg)
+  return _internal_errmsg();
+}
+inline void ResultCode::set_errmsg(const std::string& value) {
+  _internal_set_errmsg(value);
+  // @@protoc_insertion_point(field_set:faxbug.ResultCode.errmsg)
+}
+inline std::string* ResultCode::mutable_errmsg() {
+  // @@protoc_insertion_point(field_mutable:faxbug.ResultCode.errmsg)
+  return _internal_mutable_errmsg();
+}
+inline const std::string& ResultCode::_internal_errmsg() const {
+  return errmsg_.GetNoArena();
+}
+inline void ResultCode::_internal_set_errmsg(const std::string& value) {
+  
+  errmsg_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ResultCode::set_errmsg(std::string&& value) {
+  
+  errmsg_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:faxbug.ResultCode.errmsg)
+}
+inline void ResultCode::set_errmsg(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  errmsg_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:faxbug.ResultCode.errmsg)
+}
+inline void ResultCode::set_errmsg(const void* value, size_t size) {
+  
+  errmsg_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:faxbug.ResultCode.errmsg)
+}
+inline std::string* ResultCode::_internal_mutable_errmsg() {
+  
+  return errmsg_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ResultCode::release_errmsg() {
+  // @@protoc_insertion_point(field_release:faxbug.ResultCode.errmsg)
+  
+  return errmsg_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ResultCode::set_allocated_errmsg(std::string* errmsg) {
+  if (errmsg != nullptr) {
+    
+  } else {
+    
+  }
+  errmsg_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), errmsg);
+  // @@protoc_insertion_point(field_set_allocated:faxbug.ResultCode.errmsg)
+}
+
+// -------------------------------------------------------------------
+
+// LoginRequest
+
+// bytes name = 1;
+inline void LoginRequest::clear_name() {
   name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline const std::string& Person::name() const {
-  // @@protoc_insertion_point(field_get:example_package.Person.name)
+inline const std::string& LoginRequest::name() const {
+  // @@protoc_insertion_point(field_get:faxbug.LoginRequest.name)
   return _internal_name();
 }
-inline void Person::set_name(const std::string& value) {
+inline void LoginRequest::set_name(const std::string& value) {
   _internal_set_name(value);
-  // @@protoc_insertion_point(field_set:example_package.Person.name)
+  // @@protoc_insertion_point(field_set:faxbug.LoginRequest.name)
 }
-inline std::string* Person::mutable_name() {
-  // @@protoc_insertion_point(field_mutable:example_package.Person.name)
+inline std::string* LoginRequest::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:faxbug.LoginRequest.name)
   return _internal_mutable_name();
 }
-inline const std::string& Person::_internal_name() const {
+inline const std::string& LoginRequest::_internal_name() const {
   return name_.GetNoArena();
 }
-inline void Person::_internal_set_name(const std::string& value) {
+inline void LoginRequest::_internal_set_name(const std::string& value) {
   
   name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
-inline void Person::set_name(std::string&& value) {
+inline void LoginRequest::set_name(std::string&& value) {
   
   name_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:example_package.Person.name)
+  // @@protoc_insertion_point(field_set_rvalue:faxbug.LoginRequest.name)
 }
-inline void Person::set_name(const char* value) {
+inline void LoginRequest::set_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_package.Person.name)
+  // @@protoc_insertion_point(field_set_char:faxbug.LoginRequest.name)
 }
-inline void Person::set_name(const char* value, size_t size) {
+inline void LoginRequest::set_name(const void* value, size_t size) {
   
   name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_package.Person.name)
+  // @@protoc_insertion_point(field_set_pointer:faxbug.LoginRequest.name)
 }
-inline std::string* Person::_internal_mutable_name() {
+inline std::string* LoginRequest::_internal_mutable_name() {
   
   return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* Person::release_name() {
-  // @@protoc_insertion_point(field_release:example_package.Person.name)
+inline std::string* LoginRequest::release_name() {
+  // @@protoc_insertion_point(field_release:faxbug.LoginRequest.name)
   
   return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void Person::set_allocated_name(std::string* name) {
+inline void LoginRequest::set_allocated_name(std::string* name) {
   if (name != nullptr) {
     
   } else {
     
   }
   name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:example_package.Person.name)
+  // @@protoc_insertion_point(field_set_allocated:faxbug.LoginRequest.name)
 }
 
-// int32 id = 2;
-inline void Person::clear_id() {
-  id_ = 0;
+// bytes pwd = 2;
+inline void LoginRequest::clear_pwd() {
+  pwd_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 Person::_internal_id() const {
-  return id_;
+inline const std::string& LoginRequest::pwd() const {
+  // @@protoc_insertion_point(field_get:faxbug.LoginRequest.pwd)
+  return _internal_pwd();
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 Person::id() const {
-  // @@protoc_insertion_point(field_get:example_package.Person.id)
-  return _internal_id();
+inline void LoginRequest::set_pwd(const std::string& value) {
+  _internal_set_pwd(value);
+  // @@protoc_insertion_point(field_set:faxbug.LoginRequest.pwd)
 }
-inline void Person::_internal_set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline std::string* LoginRequest::mutable_pwd() {
+  // @@protoc_insertion_point(field_mutable:faxbug.LoginRequest.pwd)
+  return _internal_mutable_pwd();
+}
+inline const std::string& LoginRequest::_internal_pwd() const {
+  return pwd_.GetNoArena();
+}
+inline void LoginRequest::_internal_set_pwd(const std::string& value) {
   
-  id_ = value;
+  pwd_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
-inline void Person::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_id(value);
-  // @@protoc_insertion_point(field_set:example_package.Person.id)
-}
-
-// string email = 3;
-inline void Person::clear_email() {
-  email_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& Person::email() const {
-  // @@protoc_insertion_point(field_get:example_package.Person.email)
-  return _internal_email();
-}
-inline void Person::set_email(const std::string& value) {
-  _internal_set_email(value);
-  // @@protoc_insertion_point(field_set:example_package.Person.email)
-}
-inline std::string* Person::mutable_email() {
-  // @@protoc_insertion_point(field_mutable:example_package.Person.email)
-  return _internal_mutable_email();
-}
-inline const std::string& Person::_internal_email() const {
-  return email_.GetNoArena();
-}
-inline void Person::_internal_set_email(const std::string& value) {
+inline void LoginRequest::set_pwd(std::string&& value) {
   
-  email_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-}
-inline void Person::set_email(std::string&& value) {
-  
-  email_.SetNoArena(
+  pwd_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:example_package.Person.email)
+  // @@protoc_insertion_point(field_set_rvalue:faxbug.LoginRequest.pwd)
 }
-inline void Person::set_email(const char* value) {
+inline void LoginRequest::set_pwd(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  email_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_package.Person.email)
+  pwd_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:faxbug.LoginRequest.pwd)
 }
-inline void Person::set_email(const char* value, size_t size) {
+inline void LoginRequest::set_pwd(const void* value, size_t size) {
   
-  email_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  pwd_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_package.Person.email)
+  // @@protoc_insertion_point(field_set_pointer:faxbug.LoginRequest.pwd)
 }
-inline std::string* Person::_internal_mutable_email() {
+inline std::string* LoginRequest::_internal_mutable_pwd() {
   
-  return email_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return pwd_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* Person::release_email() {
-  // @@protoc_insertion_point(field_release:example_package.Person.email)
+inline std::string* LoginRequest::release_pwd() {
+  // @@protoc_insertion_point(field_release:faxbug.LoginRequest.pwd)
   
-  return email_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return pwd_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void Person::set_allocated_email(std::string* email) {
-  if (email != nullptr) {
+inline void LoginRequest::set_allocated_pwd(std::string* pwd) {
+  if (pwd != nullptr) {
     
   } else {
     
   }
-  email_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), email);
-  // @@protoc_insertion_point(field_set_allocated:example_package.Person.email)
+  pwd_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), pwd);
+  // @@protoc_insertion_point(field_set_allocated:faxbug.LoginRequest.pwd)
+}
+
+// -------------------------------------------------------------------
+
+// LoginResponse
+
+// .faxbug.ResultCode result = 1;
+inline bool LoginResponse::_internal_has_result() const {
+  return this != internal_default_instance() && result_ != nullptr;
+}
+inline bool LoginResponse::has_result() const {
+  return _internal_has_result();
+}
+inline void LoginResponse::clear_result() {
+  if (GetArenaNoVirtual() == nullptr && result_ != nullptr) {
+    delete result_;
+  }
+  result_ = nullptr;
+}
+inline const ::faxbug::ResultCode& LoginResponse::_internal_result() const {
+  const ::faxbug::ResultCode* p = result_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::faxbug::ResultCode*>(
+      &::faxbug::_ResultCode_default_instance_);
+}
+inline const ::faxbug::ResultCode& LoginResponse::result() const {
+  // @@protoc_insertion_point(field_get:faxbug.LoginResponse.result)
+  return _internal_result();
+}
+inline ::faxbug::ResultCode* LoginResponse::release_result() {
+  // @@protoc_insertion_point(field_release:faxbug.LoginResponse.result)
+  
+  ::faxbug::ResultCode* temp = result_;
+  result_ = nullptr;
+  return temp;
+}
+inline ::faxbug::ResultCode* LoginResponse::_internal_mutable_result() {
+  
+  if (result_ == nullptr) {
+    auto* p = CreateMaybeMessage<::faxbug::ResultCode>(GetArenaNoVirtual());
+    result_ = p;
+  }
+  return result_;
+}
+inline ::faxbug::ResultCode* LoginResponse::mutable_result() {
+  // @@protoc_insertion_point(field_mutable:faxbug.LoginResponse.result)
+  return _internal_mutable_result();
+}
+inline void LoginResponse::set_allocated_result(::faxbug::ResultCode* result) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete result_;
+  }
+  if (result) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      result = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, result, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  result_ = result;
+  // @@protoc_insertion_point(field_set_allocated:faxbug.LoginResponse.result)
+}
+
+// bool success = 2;
+inline void LoginResponse::clear_success() {
+  success_ = false;
+}
+inline bool LoginResponse::_internal_success() const {
+  return success_;
+}
+inline bool LoginResponse::success() const {
+  // @@protoc_insertion_point(field_get:faxbug.LoginResponse.success)
+  return _internal_success();
+}
+inline void LoginResponse::_internal_set_success(bool value) {
+  
+  success_ = value;
+}
+inline void LoginResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:faxbug.LoginResponse.success)
+}
+
+// -------------------------------------------------------------------
+
+// GetFrindListsRequest
+
+// uint32 userid = 1;
+inline void GetFrindListsRequest::clear_userid() {
+  userid_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 GetFrindListsRequest::_internal_userid() const {
+  return userid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 GetFrindListsRequest::userid() const {
+  // @@protoc_insertion_point(field_get:faxbug.GetFrindListsRequest.userid)
+  return _internal_userid();
+}
+inline void GetFrindListsRequest::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  userid_ = value;
+}
+inline void GetFrindListsRequest::set_userid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_userid(value);
+  // @@protoc_insertion_point(field_set:faxbug.GetFrindListsRequest.userid)
+}
+
+// -------------------------------------------------------------------
+
+// User
+
+// bytes name = 1;
+inline void User::clear_name() {
+  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& User::name() const {
+  // @@protoc_insertion_point(field_get:faxbug.User.name)
+  return _internal_name();
+}
+inline void User::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:faxbug.User.name)
+}
+inline std::string* User::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:faxbug.User.name)
+  return _internal_mutable_name();
+}
+inline const std::string& User::_internal_name() const {
+  return name_.GetNoArena();
+}
+inline void User::_internal_set_name(const std::string& value) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void User::set_name(std::string&& value) {
+  
+  name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:faxbug.User.name)
+}
+inline void User::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:faxbug.User.name)
+}
+inline void User::set_name(const void* value, size_t size) {
+  
+  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:faxbug.User.name)
+}
+inline std::string* User::_internal_mutable_name() {
+  
+  return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* User::release_name() {
+  // @@protoc_insertion_point(field_release:faxbug.User.name)
+  
+  return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void User::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:faxbug.User.name)
+}
+
+// uint32 age = 2;
+inline void User::clear_age() {
+  age_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 User::_internal_age() const {
+  return age_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 User::age() const {
+  // @@protoc_insertion_point(field_get:faxbug.User.age)
+  return _internal_age();
+}
+inline void User::_internal_set_age(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  age_ = value;
+}
+inline void User::set_age(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_age(value);
+  // @@protoc_insertion_point(field_set:faxbug.User.age)
+}
+
+// .faxbug.User.Sex sex = 3;
+inline void User::clear_sex() {
+  sex_ = 0;
+}
+inline ::faxbug::User_Sex User::_internal_sex() const {
+  return static_cast< ::faxbug::User_Sex >(sex_);
+}
+inline ::faxbug::User_Sex User::sex() const {
+  // @@protoc_insertion_point(field_get:faxbug.User.sex)
+  return _internal_sex();
+}
+inline void User::_internal_set_sex(::faxbug::User_Sex value) {
+  
+  sex_ = value;
+}
+inline void User::set_sex(::faxbug::User_Sex value) {
+  _internal_set_sex(value);
+  // @@protoc_insertion_point(field_set:faxbug.User.sex)
+}
+
+// -------------------------------------------------------------------
+
+// GetFrindListsResponse
+
+// .faxbug.ResultCode result = 1;
+inline bool GetFrindListsResponse::_internal_has_result() const {
+  return this != internal_default_instance() && result_ != nullptr;
+}
+inline bool GetFrindListsResponse::has_result() const {
+  return _internal_has_result();
+}
+inline void GetFrindListsResponse::clear_result() {
+  if (GetArenaNoVirtual() == nullptr && result_ != nullptr) {
+    delete result_;
+  }
+  result_ = nullptr;
+}
+inline const ::faxbug::ResultCode& GetFrindListsResponse::_internal_result() const {
+  const ::faxbug::ResultCode* p = result_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::faxbug::ResultCode*>(
+      &::faxbug::_ResultCode_default_instance_);
+}
+inline const ::faxbug::ResultCode& GetFrindListsResponse::result() const {
+  // @@protoc_insertion_point(field_get:faxbug.GetFrindListsResponse.result)
+  return _internal_result();
+}
+inline ::faxbug::ResultCode* GetFrindListsResponse::release_result() {
+  // @@protoc_insertion_point(field_release:faxbug.GetFrindListsResponse.result)
+  
+  ::faxbug::ResultCode* temp = result_;
+  result_ = nullptr;
+  return temp;
+}
+inline ::faxbug::ResultCode* GetFrindListsResponse::_internal_mutable_result() {
+  
+  if (result_ == nullptr) {
+    auto* p = CreateMaybeMessage<::faxbug::ResultCode>(GetArenaNoVirtual());
+    result_ = p;
+  }
+  return result_;
+}
+inline ::faxbug::ResultCode* GetFrindListsResponse::mutable_result() {
+  // @@protoc_insertion_point(field_mutable:faxbug.GetFrindListsResponse.result)
+  return _internal_mutable_result();
+}
+inline void GetFrindListsResponse::set_allocated_result(::faxbug::ResultCode* result) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete result_;
+  }
+  if (result) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      result = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, result, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  result_ = result;
+  // @@protoc_insertion_point(field_set_allocated:faxbug.GetFrindListsResponse.result)
+}
+
+// repeated .faxbug.User friend_list = 2;
+inline int GetFrindListsResponse::_internal_friend_list_size() const {
+  return friend_list_.size();
+}
+inline int GetFrindListsResponse::friend_list_size() const {
+  return _internal_friend_list_size();
+}
+inline void GetFrindListsResponse::clear_friend_list() {
+  friend_list_.Clear();
+}
+inline ::faxbug::User* GetFrindListsResponse::mutable_friend_list(int index) {
+  // @@protoc_insertion_point(field_mutable:faxbug.GetFrindListsResponse.friend_list)
+  return friend_list_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::faxbug::User >*
+GetFrindListsResponse::mutable_friend_list() {
+  // @@protoc_insertion_point(field_mutable_list:faxbug.GetFrindListsResponse.friend_list)
+  return &friend_list_;
+}
+inline const ::faxbug::User& GetFrindListsResponse::_internal_friend_list(int index) const {
+  return friend_list_.Get(index);
+}
+inline const ::faxbug::User& GetFrindListsResponse::friend_list(int index) const {
+  // @@protoc_insertion_point(field_get:faxbug.GetFrindListsResponse.friend_list)
+  return _internal_friend_list(index);
+}
+inline ::faxbug::User* GetFrindListsResponse::_internal_add_friend_list() {
+  return friend_list_.Add();
+}
+inline ::faxbug::User* GetFrindListsResponse::add_friend_list() {
+  // @@protoc_insertion_point(field_add:faxbug.GetFrindListsResponse.friend_list)
+  return _internal_add_friend_list();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::faxbug::User >&
+GetFrindListsResponse::friend_list() const {
+  // @@protoc_insertion_point(field_list:faxbug.GetFrindListsResponse.friend_list)
+  return friend_list_;
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace example_package
+}  // namespace faxbug
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::faxbug::User_Sex> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::faxbug::User_Sex>() {
+  return ::faxbug::User_Sex_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 
