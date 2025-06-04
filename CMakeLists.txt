@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 project(mrpc)
+
+set(CMAKE_BUILD_TYPE "Debug")
+
+
 # 项目可执行文件输出路径
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 # 项目库文件输出路径

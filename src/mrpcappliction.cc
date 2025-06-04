@@ -45,7 +45,9 @@ void MrpcApplication::Init(int argc,char **argv){
 
 }
 
-
+MrpcConfig& MrpcApplication::GetConfig(){
+    return m_config;
+}
 
 MrpcApplication& MrpcApplication::GetInstance(){
     static MrpcApplication app;

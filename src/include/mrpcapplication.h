@@ -6,6 +6,7 @@ public:
     //  框架初始化操作 provider -i config.
     static void Init(int argc,char **argv);
     static MrpcApplication& GetInstance();
+    static MrpcConfig& GetConfig();
 private:
 
     static MrpcConfig m_config;
