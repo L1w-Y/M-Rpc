@@ -52,4 +52,5 @@ int main() {
     google::protobuf::ShutdownProtobufLibrary();
 
     return 0;
+
 }

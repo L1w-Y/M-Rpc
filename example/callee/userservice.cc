@@ -1,7 +1,8 @@
 #include <iostream>
 #include<string>
 #include"user.pb.h"
-
+#include"mrpcapplication.h"
+#include"rpcprovider.h"
 class UserService :public fixbug::UserServiceRpc
 {
 public:
@@ -38,4 +39,20 @@ public:
             }
 
 };
+
+int main(int argc,char **argv){
+    /*
+        服务发表流程
+    */
+   MrpcApplication::Init(argc,argv);
+
+   RpcProvider provider;
+
+   provider.NotifyService(new UserService());
+
+   provider.run();
+
+   return 0;
+
+}
 

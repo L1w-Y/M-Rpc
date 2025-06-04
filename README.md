@@ -13,7 +13,7 @@
   - [2.4 package](#24-package)
   - [2.5 序列化和反序列化](#25-序列化和反序列化)
   - [2.6 在rpc通信中的序列化和反序列化](#26-在rpc通信中的序列化和反序列化)
-- [三、从使用角度理解框架的功能](#三从使用角度理解框架的功能)
+  - [2.7 从使用角度看protobuf和rpc框架](#27-从使用角度看protobuf和rpc框架)
 
 ## 一、RPC通信原理
 
@@ -61,6 +61,8 @@ RPC又叫远程过程调用，它的核心原理是在分布式系统中的函�
 **黄色部分**：设计rpc方法参数的打包和解析，也就是数据的序列化和反序列化，使用Protobuf
 
 **绿色部分**：网络部分，包括寻找rpc服务主机，发起rpc调用请求和响应rpc调用结果，使用muduo网络库和zookeeper服务配置中心（专门做服务发现）
+
+<p align="right"><a href="#手写RPC框架">回到顶部⬆️</a></p>
 
 ## 二、protobuf
 
@@ -190,6 +192,7 @@ enum Color {
   BLUE = 2
 };
 ```
+<p align="right"><a href="##二、protobuf">回到章节标题⬆️</a></p>
 
 ### 2.3 proto文件的导入
 在 Protocol Buffers 中，可以使用import语句在当前.ptoto中导入其它的.proto文件。这样就可以在一个.proto文件中引用并使用其它文件中定义的消息类型和枚举类型
@@ -226,6 +229,8 @@ message RepeatedWrapper {
 - 导入的文件将会在编译时与当前文件一起被编译。
 - 导入的文件也可以继续导入其他文件，形成一个文件依赖的层次结构
 
+<p align="right"><a href="##二、protobuf">回到章节标题⬆️</a></p>
+
 ### 2.4 package
 在 Protobuf 中，可以使用package关键字来定义一个消息所属的包（package）。类似于命名空间
 
@@ -239,6 +244,8 @@ message MyMessage
 }
 ```
 代表这个文件中所有的数据类型都属于mypackage命名空间下
+
+<p align="right"><a href="##二、protobuf">回到章节标题⬆️</a></p>
 
 ### 2.5 序列化和反序列化
 1. 序列化
@@ -268,6 +275,7 @@ bool ParseFromArray(const void* data, int size);
 bool ParseFromIstream(std::istream* input);
 bool ParseFromFileDescriptor(int file_descriptor);
 ```
+<p align="right"><a href="##二、protobuf">回到章节标题⬆️</a></p>
 
 ### 2.6 在rpc通信中的序列化和反序列化
 首先要明确的是，protobuf本身是没有任何rpc通信功能的，他只是对rpc方法的描述，通过它的描述，我们来做有关rpc请求的序列化和反序列化
@@ -392,5 +400,91 @@ void UserServiceRpc_Stub::GetFriendLists(::PROTOBUF_NAMESPACE_ID::RpcController*
 是一个纯虚函数，需要子类重写,其实这个方法就是给到用户，在使用框架时的接口
 ![rpc](res/proto%20rpc.png)
 
-## 三、从使用角度理解框架的功能
+<p align="right"><a href="#手写RPC框架">回到顶部⬆️</a></p>
 
+### 2.7 从使用角度看protobuf和rpc框架
+
+现在有这么一个本地服务，服务提供一个方法Login
+```cpp
+class UserService :public fixbug::UserServiceRpc
+{
+public:
+    bool Login(std::string name,std::string pwd){
+        std::cout<<"doing local service:Login"<<std::endl;
+        std::cout<<"name:"<<name<<"pwd"<<pwd<<std::endl;
+        return true;
+    }
+}
+```
+想要把他变成rpc远程方法，不光可以在进程内部调用，还可以在远端调用
+
+1. 首先我们在调用一个远程的rpc方法时，肯定是需要给到实际的服务提供者`方法名`和`参数`，然后方法执行完成后提供者返回`函数的返回值`，而protobuf在其中的作用就是对双方传递的消息进行序列化和反序列化
+
+所以proto文件的定义是这样的：
+```cpp
+syntax = "proto3";
+
+package fixbug;
+option cc_generic_services = true;
+
+message ResultCode
+{
+    int32 errcode = 1;
+    bytes errmsg = 2;
+}
+message LoginRequest
+{
+    bytes name = 1;
+    bytes pwd = 2;
+}
+message LoginResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+service UserServiceRpc
+{
+    rpc Login(LoginRequest) returns(LoginResponse);
+}
+```
+- 请求参数：LoginRequest
+- 返回参数：LoginResponse
+- rpc方法：service UserServiceRpc
+- 错误码：ResultCode
+
+
+2. 生成.pb.h 和 .pb.cc
+得到上文提到的UserServiceRpc类（服务提供端）和UserServiceRpc_Stub类（服务消费端）
+如果将本地的服务改为rpc的服务，那就是这样：
+```cpp
+    /*
+    重写基类UserServiceRpc的虚函数，作为rpc服务提供方，当远端发起调用请求时，首先是来到rpc框架所提供的函数，来匹配本地需要做的业务，在执行完成后
+    将结果重新序列化然后返回给远端
+    1. caller ==> Login(LoginRequest) ==>muduo => callee
+    2. callee ==> Login(LoginRequest) ==>
+    */
+    void Login(::google::protobuf::RpcController* controller,
+                       const ::fixbug::LoginRequest* request,
+                       ::fixbug::LoginResponse* response,
+                       ::google::protobuf::Closure* done)
+            {   
+                //  应用获取相应的请求数据
+                std::string name = request->name();
+                std::string pwd = request->pwd();
+
+                //执行本地业务
+                bool login_result = Login(name,pwd);
+                //写入响应，错误信息和返回值
+                fixbug::ResultCode *code = response->mutable_result();
+                code->set_errcode(0);
+                code->set_errmsg("");
+                response->set_success(login_result);
+                //执行回调 执行响应消息的序列化和网络发送（由框架完成）
+                done->Run();
+            }
+
+};
+```
+
+
+## 三、rpc框架基础类设计
