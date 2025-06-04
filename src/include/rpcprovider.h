@@ -9,4 +9,4 @@ public:
     void NotifyService(google::protobuf::Service *service);
     //启动rpc服务，开始提供远程调用服务
     void run();
-}
+};
