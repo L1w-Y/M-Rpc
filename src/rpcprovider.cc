@@ -1,5 +1,6 @@
 #include"rpcprovider.h"
 #include"mrpcapplication.h"
+#include"rpcheader.pb.h"
 
 
 void RpcProvider::NotifyService(google::protobuf::Service *service){
@@ -46,11 +47,61 @@ void RpcProvider::run(){
 
 }
 
-
-void RpcProvider::onConnection(const muduo::net::TcpConnectionPtr&){
-
+//新的socket连接回调
+void RpcProvider::onConnection(const muduo::net::TcpConnectionPtr& conn){
+    if(!conn->connected()){
+        conn->shutdown();
+    }
 }
 
-void RpcProvider::onMessage(const muduo::net::TcpConnectionPtr&,muduo::net::Buffer*,muduo::Timestamp){
-    
+/*
+    框架内部通信的消息格式
+          消息头       请求的服务名+方法+参数长度       参数
+    |----------------|-------------------------|-------------|
+     4字节                      
+     代表第二段数据长度
+*/
+//已建立连接用户的读写回调
+void RpcProvider::onMessage(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buffer,muduo::Timestamp time){
+    //接收远程rpc请求的数据
+    std::string recv_buf = buffer->retrieveAllAsString();
+
+    uint32_t header_size = 0;
+    recv_buf.copy((char*)&header_size,4,0);
+    //根据header_size读取数据头的原始字节流，反序列化得到rpc请求的详细信息
+    std::string rpc_header_str = recv_buf.substr(4,header_size);
+    mrpc::RpcHeader rpcHeader;
+    std::string service_name;
+    std::string method_name;
+    uint32_t args_size;
+
+    if(rpcHeader.ParseFromString(rpc_header_str)){
+        std::cout<<"反序列化成功"<<std::endl;
+        service_name = rpcHeader.service_name();
+        method_name = rpcHeader.method_name();
+        args_size = rpcHeader.args_size();
+    }
+    else{
+        std::cout<<"反序列化失败"<<std::endl;
+        return;
+    }
+    //获取参数字节流
+    std::string args_str = recv_buf.substr(4+header_size,args_size);
+
+     // === 调试信息输出 ===
+    std::cout << "====== RPC Header Info ======" << std::endl;
+    std::cout << "服务名 (service_name): " << service_name << std::endl;
+    std::cout << "方法名 (method_name): " << method_name << std::endl;
+    std::cout << "参数大小 (args_size): " << args_size << std::endl;
+    std::cout << "参数 (args_str): " << args_str << std::endl;
+    std::cout << "=============================" << std::endl;
+
+
+    //获取service对象和方法
+     
 }
+
+
+
+
+

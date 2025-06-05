@@ -28,8 +28,8 @@ private:
     muduo::net::EventLoop eventLoop;
 
     //新的socket连接回调
-    void onConnection(const muduo::net::TcpConnectionPtr&);
-    void onMessage(const muduo::net::TcpConnectionPtr&,muduo::net::Buffer*,muduo::Timestamp);
+    void onConnection(const muduo::net::TcpConnectionPtr& conn);
+    void onMessage(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buffer,muduo::Timestamp time);
 };
 
 
