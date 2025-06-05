@@ -4,6 +4,9 @@
 #include<muduo/net/TcpServer.h>
 #include<muduo/net/EventLoop.h>
 #include<muduo/net/InetAddress.h>
+#include<unordered_map>
+#include<string>
+#include<google/protobuf/descriptor.h>
 //服务发布类，专门提供rpc服务发布
 class RpcProvider
 {
@@ -14,12 +17,19 @@ public:
     void run();
 private:
 
+    struct ServiceInfo
+    {
+        google::protobuf::Service *m_service; //保存服务对象
+        std::unordered_map<std::string,const google::protobuf::MethodDescriptor*> m_methodMap;//保存服务中的方法
+    };
+
+    std::unordered_map<std::string,ServiceInfo> m_serviceInfoMap;//服务名 ：服务对象
     //eventloop
     muduo::net::EventLoop eventLoop;
 
     //新的socket连接回调
-    void onConnection(const TcpConnectionPtr&);
-    void onMessage(const TcpConnectionPtr&,Buffer*,Timestamp);
+    void onConnection(const muduo::net::TcpConnectionPtr&);
+    void onMessage(const muduo::net::TcpConnectionPtr&,muduo::net::Buffer*,muduo::Timestamp);
 };
 
 
