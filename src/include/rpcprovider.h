@@ -18,7 +18,7 @@ public:
 private:
 
     struct ServiceInfo
-    {
+    { 
         google::protobuf::Service *m_service; //保存服务对象
         std::unordered_map<std::string,const google::protobuf::MethodDescriptor*> m_methodMap;//保存服务中的方法
     };
@@ -30,6 +30,8 @@ private:
     //新的socket连接回调
     void onConnection(const muduo::net::TcpConnectionPtr& conn);
     void onMessage(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buffer,muduo::Timestamp time);
+    //Closure回调
+    void SendRpcResponse(const muduo::net::TcpConnectionPtr&,google::protobuf::Message*);
 };
 
 
