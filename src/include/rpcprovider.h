@@ -31,7 +31,7 @@ private:
     void onConnection(const muduo::net::TcpConnectionPtr& conn);
     void onMessage(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buffer,muduo::Timestamp time);
     //Closure回调
-    void SendRpcResponse(const muduo::net::TcpConnectionPtr&,google::protobuf::Message*);
+    void SendRpcResponse(const muduo::net::TcpConnectionPtr& conn,google::protobuf::Message* response);
 };
 
 

@@ -125,16 +125,26 @@ void RpcProvider::onMessage(const muduo::net::TcpConnectionPtr& conn,muduo::net:
     google::protobuf::Message *response = service->GetResponsePrototype(method).New();
 
     //给下面的method绑定Closure回调
-    google::protobuf::NewCallback
+    google::protobuf::Closure *done = google::protobuf::NewCallback<RpcProvider,
+                                const muduo::net::TcpConnectionPtr&,
+                                google::protobuf::Message*>(this,&RpcProvider::SendRpcResponse,conn,response);
 
     //调用当前rpc发布的方法
     //假设应用层 new UserService().Login(controller,request,response,done)
-    service->CallMethod(method,nullptr,request,response,);
+    service->CallMethod(method,nullptr,request,response,done);
 }
 
 //Closure的回调操作，用于序列化rpc 响应和网络发送
-void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr&,google::protobuf::Message*){
-
+void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr& conn,google::protobuf::Message* response){
+    std::string response_str;
+    if(response->SerializeToString(&response_str)){
+        conn->send(response_str);
+        conn->shutdown();   
+    }  
+    else{
+        std::cout<<"serialize response_str error"<<std::endl;
+    }
+    conn->shutdown();
 }
 
 
