@@ -34,7 +34,7 @@ public:
                 code->set_errcode(0);
                 code->set_errmsg("");
                 response->set_success(login_result);
-                //执行回调 执行序列化和网络发送
+                //执行回调  执行序列化和网络发送
                 done->Run();
             }
 

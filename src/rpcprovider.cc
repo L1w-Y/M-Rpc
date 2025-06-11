@@ -138,8 +138,7 @@ void RpcProvider::onMessage(const muduo::net::TcpConnectionPtr& conn,muduo::net:
 void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr& conn,google::protobuf::Message* response){
     std::string response_str;
     if(response->SerializeToString(&response_str)){
-        conn->send(response_str);
-        conn->shutdown();   
+        conn->send(response_str); 
     }  
     else{
         std::cout<<"serialize response_str error"<<std::endl;

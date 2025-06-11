@@ -1,5 +1,7 @@
 #pragma once
 #include "mrpcconfig.h"
+#include "mrpcchannel.h"
+#include "mrpccontroller.h"
 class MrpcApplication
 {
 public:
