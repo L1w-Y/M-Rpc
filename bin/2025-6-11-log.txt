@@ -1,0 +1,4 @@
+20:53:9userservice log message20:53:9/home/lyw/project/mrpc/example/callee/userservice.cc:main:4720:55:7userservice log message
+20:55:7/home/lyw/project/mrpc/example/callee/userservice.cc:main:47 
+[21:02:59] [INFO] userservice log message
+[21:02:59] [ERROR] /home/lyw/project/mrpc/example/callee/userservice.cc:main:47 

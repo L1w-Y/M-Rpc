@@ -3,6 +3,7 @@
 #include"user.pb.h"
 #include"mrpcapplication.h"
 #include"rpcprovider.h"
+#include"logger.h"
 class UserService :public fixbug::UserServiceRpc
 {
 public:
@@ -41,9 +42,10 @@ public:
 };
 
 int main(int argc,char **argv){
-    /*
-        服务发布流程
-    */
+
+    LOG_INFO("userservice log message");
+    LOG_ERR("%s:%s:%d ",__FILE__,__FUNCTION__,__LINE__);
+
    MrpcApplication::Init(argc,argv);
 
    RpcProvider provider;
