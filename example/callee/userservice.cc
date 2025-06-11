@@ -42,7 +42,7 @@ public:
 
 int main(int argc,char **argv){
     /*
-        服务发表流程
+        服务发布流程
     */
    MrpcApplication::Init(argc,argv);
 
