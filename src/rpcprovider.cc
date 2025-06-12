@@ -1,7 +1,7 @@
 #include"rpcprovider.h"
 #include"mrpcapplication.h"
 #include"rpcheader.pb.h"
-
+#include"zookeeperutil.h"
 
 void RpcProvider::NotifyService(google::protobuf::Service *service){
 
@@ -40,8 +40,23 @@ void RpcProvider::run(){
     });
     //设置线程数量
     server.setThreadNum(4);
-    std::cout<<"RpcProvider start service ip:"<<ip<<" prot:"<<port<<std::endl;
+
     //启动tcp监听
+    ZkClient zkCli;
+    zkCli.Start();
+    for(auto &sp : m_serviceInfoMap){
+        std::string service_path = "/"+sp.first;
+        zkCli.Create(service_path.c_str(),nullptr,0);
+        for(auto &mp : sp.second.m_methodMap)
+        {
+            std::string method_path = service_path+"/"+mp.first;
+            char method_path_data[128] = {};
+            sprintf(method_path_data,"%s:%d",ip.c_str(),port);
+            zkCli.Create(method_path.c_str(),method_path_data,strlen(method_path_data),ZOO_EPHEMERAL);
+        }
+    }
+
+    std::cout<<"RpcProvider start service ip:"<<ip<<" prot:"<<port<<std::endl;          
     server.start();
     eventLoop.loop();
 

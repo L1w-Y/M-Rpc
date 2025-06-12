@@ -6,7 +6,8 @@
 #include <netinet/in.h>     
 #include <arpa/inet.h>    
 #include <unistd.h>  
-#include "mrpcapplication.h"   
+#include "mrpcapplication.h" 
+#include"zookeeperutil.h"  
 void MrpcChannel::CallMethod(const google::protobuf::MethodDescriptor* method,
                     google::protobuf::RpcController* controller,
                     const google::protobuf::Message* request,
@@ -60,8 +61,29 @@ void MrpcChannel::CallMethod(const google::protobuf::MethodDescriptor* method,
         controller->SetFailed(errtxt);
         return;
     }
-    std::string ip = MrpcApplication::GetInstance().GetConfig().Load("rpcserverip");
-    uint16_t port = atoi(MrpcApplication::GetInstance().GetConfig().Load("rpcserverport").c_str());
+//    std::string ip = MrpcApplication::GetInstance().GetConfig().Load("rpcserverip");
+//   uint16_t port = atoi(MrpcApplication::GetInstance().GetConfig().Load("rpcserverport").c_str());
+
+    //调用方想请求方法，首先是向zk查询服务信息
+    ZkClient zkCli;
+    zkCli.Start();
+    std::string method_path ="/"+service_name+"/"+method_name;
+    std::string host_data = zkCli.GetData(method_path.c_str());
+    if(host_data == ""){
+        controller->SetFailed(method_path+"is no exist");
+        return;
+    }
+
+    int idx = host_data.find(":");
+    if(idx == -1){
+        controller->SetFailed(method_path+"address is invalid");
+        return;
+    }
+
+    std::string ip = host_data.substr(0,idx);
+    uint16_t port = atoi(host_data.substr(idx+1,host_data.size()-idx).c_str());
+
+
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port);
@@ -97,7 +119,7 @@ void MrpcChannel::CallMethod(const google::protobuf::MethodDescriptor* method,
     if(!response->ParseFromString(response_str)){
         std::cout<<"parse error. response str:"<<response_str<<std::endl;
         char errtxt[512] = {};
-        sprintf(errtxt,"parse error. response str:%s",response_str);
+        sprintf(errtxt,"parse error. response str:%s",response_str.c_str());
         controller->SetFailed(errtxt);
         return;
     }
